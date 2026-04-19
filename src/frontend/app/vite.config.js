@@ -5,6 +5,7 @@ import tailwindcss from '@tailwindcss/vite'
 
 // https://vite.dev/config/
 export default defineConfig({
+  base: '/app/',
   plugins: [react(), tailwindcss()],
    server: {
     open: false,   // disables auto browser launch

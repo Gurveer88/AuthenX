@@ -45,15 +45,15 @@ def run_generation_loop(
             skills_context=skills_context,
             tool=tool,
             previous_feedback=feedback,
-            chat_history = chat_history,
+            chat_history=chat_history,
         )
         _log_and_emit(f"Generator: produced {len(gen_output.content)} chars, {len(gen_output.citations)} citations")
         
         _log_and_emit("Validator: checking content...")
         full_prompt = prompt
         if chat_history:
-            history_text = "\n".join([f"{msg.role}:{msg.content}" for msg in chat_history])
-            full_prompt = f"Chat History: \n{history_text}\n\nCurrent Prompt:\n{prompt}"
+            history_text = "\n".join([f"{msg.role}: {msg.content}" for msg in chat_history])
+            full_prompt = f"Chat History:\n{history_text}\n\nCurrent Prompt:\n{prompt}"
         feedback = validate(
             original_prompt=full_prompt,
             generated_output=gen_output,

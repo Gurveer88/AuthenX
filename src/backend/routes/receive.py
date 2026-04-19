@@ -23,7 +23,7 @@ def process_task(task_id: str, request: ReceiveRequest):
         chat_history = []
         if request.session_id:
             session = get_session(request.session_id)
-            if session: 
+            if session:
                 chat_history = session.messages
         def status_callback(msg: str):
             publish_event(task_id, msg)
@@ -31,7 +31,7 @@ def process_task(task_id: str, request: ReceiveRequest):
             prompt=request.prompt,
             tool=request.tool,
             skills_context=skills_context,
-            chat_history = chat_history,
+            chat_history=chat_history,
             status_callback=status_callback,
         )
         try:

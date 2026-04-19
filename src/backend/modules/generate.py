@@ -70,12 +70,13 @@ def generate(
     messages = [SystemMessage(content=system_text)]
     if chat_history:
         for msg in chat_history:
-            if msg.role == 'user':
-                message.append(HumanMessage(content = msg.content))
-            elif msg.role == 'assistant':
-                message.append(AIMessage(content = msg.content))
-            elif msg.role == 'system':
-                message.append(SystemMessage(content = msg.content))
+            if msg.role == "user":
+                messages.append(HumanMessage(content=msg.content))
+            elif msg.role == "assistant":
+                messages.append(AIMessage(content=msg.content))
+            elif msg.role == "system":
+                messages.append(SystemMessage(content=msg.content))
+    messages.append(HumanMessage(content=prompt))
     logger.info("Generator LLM invoked for tool: %s", tool)
     current_messages = list(messages)
     max_tool_iterations = 5
