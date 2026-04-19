@@ -3,7 +3,7 @@ import logging
 from typing import Callable, Optional
 from dataclasses import dataclass, field
 from config import MAX_VALIDATION_ROUNDS
-from models import GeneratorOutput, RoundLog, ValidatorFeedback
+from models import GeneratorOutput, RoundLog, ValidatorFeedback, ChatMessage
 from modules.generate import generate
 from modules.validate import validate
 
@@ -24,6 +24,7 @@ def run_generation_loop(
     prompt: str,
     tool: str,
     skills_context: str,
+    chat_history: list[ChatMessage] = None,
     max_rounds: int | None = None,
     status_callback: Optional[Callable[[str], None]] = None,
 ) -> OrchestrationResult:
@@ -44,12 +45,17 @@ def run_generation_loop(
             skills_context=skills_context,
             tool=tool,
             previous_feedback=feedback,
+            chat_history = chat_history,
         )
         _log_and_emit(f"Generator: produced {len(gen_output.content)} chars, {len(gen_output.citations)} citations")
         
         _log_and_emit("Validator: checking content...")
+        full_prompt = prompt
+        if chat_history:
+            history_text = "\n".join([f"{msg.role}:{msg.content}" for msg in chat_history])
+            full_prompt = f"Chat History: \n{history_text}\n\nCurrent Prompt:\n{prompt}"
         feedback = validate(
-            original_prompt=prompt,
+            original_prompt=full_prompt,
             generated_output=gen_output,
             skills_context=skills_context,
             tool=tool,

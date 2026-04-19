@@ -2,9 +2,9 @@ from __future__ import annotations
 import json
 import logging
 from typing import Optional
-from langchain_core.messages import HumanMessage, SystemMessage
+from langchain_core.messages import HumanMessage, SystemMessage, AIMessage
 from config import get_generator_llm
-from models import GeneratorOutput, ValidatorFeedback, Citation
+from models import GeneratorOutput, ValidatorFeedback, Citation, ChatMessage
 from search import web_search
 
 
@@ -54,6 +54,7 @@ def generate(
     skills_context: str,
     tool: str,
     previous_feedback: Optional[ValidatorFeedback] = None,
+    chat_history: list[ChatMessage] = None,
 ) -> GeneratorOutput:
     llm = get_generator_llm()
     llm_with_tools = llm.bind_tools([web_search])
@@ -66,10 +67,15 @@ def generate(
             issues="\n".join(f"- {i}" for i in previous_feedback.issues),
             suggestions="\n".join(f"- {s}" for s in previous_feedback.suggestions),
         )
-    messages = [
-        SystemMessage(content=system_text),
-        HumanMessage(content=prompt)
-    ]
+    messages = [SystemMessage(content=system_text)]
+    if chat_history:
+        for msg in chat_history:
+            if msg.role == 'user':
+                message.append(HumanMessage(content = msg.content))
+            elif msg.role == 'assistant':
+                message.append(AIMessage(content = msg.content))
+            elif msg.role == 'system':
+                message.append(SystemMessage(content = msg.content))
     logger.info("Generator LLM invoked for tool: %s", tool)
     current_messages = list(messages)
     max_tool_iterations = 5

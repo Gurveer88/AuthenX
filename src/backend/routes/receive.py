@@ -20,12 +20,18 @@ def process_task(task_id: str, request: ReceiveRequest):
     try:
         skills_context = load_skills(request.tool)
         logger.info("Loaded skills for tool '%s' (%d chars)", request.tool, len(skills_context))
+        chat_history = []
+        if request.session_id:
+            session = get_session(request.session_id)
+            if session: 
+                chat_history = session.messages
         def status_callback(msg: str):
             publish_event(task_id, msg)
         result = run_generation_loop(
             prompt=request.prompt,
             tool=request.tool,
             skills_context=skills_context,
+            chat_history = chat_history,
             status_callback=status_callback,
         )
         try:
