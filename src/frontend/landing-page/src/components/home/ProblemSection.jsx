@@ -32,7 +32,7 @@ function ProblemSection() {
         id="problem"
         eyebrow="Problem"
         title="Unverified AI answers create costly risk"
-        description="TruthTrace addresses the core reliability gap: AI can be fluent and still be wrong. Teams need traceable evidence, not just plausible wording."
+        description="AuthenX addresses the core reliability gap: AI can be fluent and still be wrong. Teams need traceable evidence, not just plausible wording."
       />
       </div>
 

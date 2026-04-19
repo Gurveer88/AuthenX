@@ -55,7 +55,7 @@ function Hero() {
         <p
         data-hero-label
         className="text-sm uppercase tracking-[0.28em] text-white/70">
-          TruthTrace • AI Hallucination Auditor
+          AuthenX • AI Hallucination Auditor
         </p>
         <p
         data-hero-title
@@ -68,7 +68,7 @@ function Hero() {
           Audit every claim. Detect hallucinations. Build trust in AI-generated content.
         </p>
         <p data-hero-copy className="max-w-2xl text-sm text-white/60 md:text-base">
-          TruthTrace helps teams move from guesswork to evidence-backed AI usage. From a single chatbot response to enterprise-scale model workflows, every statement is extracted, traced to sources, and graded for reliability in seconds.
+          AuthenX helps teams move from guesswork to evidence-backed AI usage. From a single chatbot response to enterprise-scale model workflows, every statement is extracted, traced to sources, and graded for reliability in seconds.
         </p>
 
         <div data-hero-cta className="flex flex-wrap items-center gap-3 pt-2">

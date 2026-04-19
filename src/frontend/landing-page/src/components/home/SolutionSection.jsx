@@ -35,7 +35,7 @@ function SolutionSection() {
         id="solution"
         eyebrow="Solution"
         title="A transparent verification workflow"
-        description="TruthTrace turns model output into a repeatable audit pipeline so decisions are grounded in evidence, not assumptions."
+        description="AuthenX turns model output into a repeatable audit pipeline so decisions are grounded in evidence, not assumptions."
       />
       </div>
 

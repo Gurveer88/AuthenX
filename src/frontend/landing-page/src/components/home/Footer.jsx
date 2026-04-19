@@ -23,7 +23,7 @@ function Footer() {
           <a href="#top" className="transition hover:text-white">
             About
           </a>
-          <a href="mailto:contact@truthtrace.ai" className="transition hover:text-white">
+          <a href="mailto:contact@AuthenX.ai" className="transition hover:text-white">
             Contact
           </a>
         </div>

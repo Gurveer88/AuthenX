@@ -64,3 +64,4 @@ Produce a JSON object with the following structure:
     - Do NOT use `-- >` or `- ->` (invalid syntax)
 12. Escape special characters in node labels using quotes: `A["Label with special chars"]`
 13. ALWAYS separate each node definition and edge declaration with a newline `\n`. Never place an edge definition on the same line as a node definition (e.g. `E[Node] D --> F` is invalid).
+14. CRITICAL: Never use `end` as a node ID (e.g., `end["Label"]`), as it is a reserved keyword in Mermaid and will cause parse errors. Use `End` or `endNode` instead.

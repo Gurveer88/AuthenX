@@ -26,7 +26,7 @@ function UseCasesSection() {
       <SectionHeading
         eyebrow="Use Cases"
         title="Designed for both operators and builders"
-        description="TruthTrace supports teams that consume AI output and teams that ship AI-powered products."
+        description="AuthenX supports teams that consume AI output and teams that ship AI-powered products."
       />
       </div>
 
